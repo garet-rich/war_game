@@ -1,21 +1,19 @@
 class Card
-    def initialize(suit, rank, value)
+    def initialize(suit, value, rank)
         @suit = suit
-        @rank = rank
         @value = value
+        @rank = rank
     end
 
     def suit()
         return @suit
     end
 
-    def rank()
-        return @rank
-    end
-
     def value()
         return @value
     end
-end
 
-test1 = Card.new(:heart, 'Jack', 11)
+    def rank()
+        return @rank
+    end
+end
