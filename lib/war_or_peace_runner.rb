@@ -2,7 +2,7 @@ require_relative "turn"
 
 class Game
     def initialize
-        @turn_counter = 0
+        @turn_counter = 1
 
         #clubs
         card1 = Card.new(:club, '2', 2)
@@ -90,13 +90,33 @@ class Game
         if @user_input == "GO" || @user_input == "go"
             while(@player1.has_lost? != true && @player2.has_lost? != true && @turn_counter < 100000000)
                 turn = Turn.new(@player1, @player2)
+
                 if(turn.type == :basic)
+                    winner = turn.winner
+                    turn.pile_cards
+                    turn.award_spoils(winner)
+                    p "Turn #{@turn_counter}: #{winner.name} won #{turn.spoils_of_war.length} cards"
                 elsif(turn.type == :war)
+                    winner = turn.winner
+                    turn.pile_cards
+                    turn.award_spoils(winner)
+                    p "Turn #{@turn_counter}: WAR - #{winner.name} won #{turn.spoils_of_war.length} cards"
                 else
+                    turn.pile_cards
+                    p "Turn #{@turn_counter}: *mutually assured destruction* #{turn.spoils_of_war.length} cards removed from play"
                 end
+                @turn_counter += 1
             end
         else
-            p "Your selection is invalid"
+            p "Your selection is invalid, please try again"
+        end
+
+        if(@player1.has_lost? == true)
+            p "*~*~*~* #{@player2.name} has won the game! *~*~*~*"
+        elsif(@player2.has_lost? == true)
+            p "*~*~*~* #{@player1.name} has won the game! *~*~*~*"
+        else
+            p "---- DRAW ----"
         end
     end
 end
