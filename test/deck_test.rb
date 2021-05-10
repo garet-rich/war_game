@@ -21,12 +21,13 @@ class DeckTest < Minitest::Test
 
     deck = Deck.new([card1, card2, card3])
     
-    assert_equal :diamond, card1.suit
-    assert_equal 'Queen', card1.value
-    assert_equal 12, card1.rank
+    assert_equal deck.rank_of_card_at(0), card1.value
+    assert_equal deck.rank_of_card_at(1), card2.value
+    assert_equal deck.rank_of_card_at(2), card3.value
   end
 
   def test_remove_card
+
   end
 
   def test_add_card

@@ -36,7 +36,7 @@ class Turn
             else
                 return player2
             end
-        elsif type() == :war
+        elsif type() == :war && player1.deck.rank_of_card_at(2) != nil && player2.deck.rank_of_card_at(2) != nil
             if(player1.deck.rank_of_card_at(2) > player2.deck.rank_of_card_at(2))
                 return player1
             else
