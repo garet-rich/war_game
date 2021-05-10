@@ -77,7 +77,6 @@ class Game
         @player2 = Player.new("Bernice", deck2)
         
         start()
-        
     end
 
     def start
