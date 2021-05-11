@@ -86,16 +86,16 @@ class Game
         p "------------------------------------------------------------------"
         @user_input = gets.chomp
 
-        if @user_input == "GO" || @user_input == "go"
+        if @user_input.downcase == "go"
             while(@player1.has_lost? != true && @player2.has_lost? != true && @turn_counter < 1000000)
                 turn = Turn.new(@player1, @player2)
 
-                if(turn.type == :basic)
+                if(turn.type == :basic && turn.winner != nil)
                     winner = turn.winner
                     turn.pile_cards
                     turn.award_spoils(winner)
                     p "Turn #{@turn_counter}: #{winner.name} won #{turn.spoils_of_war.length} cards"
-                elsif(turn.type == :war)
+                elsif(turn.type == :war && turn.winner != nil)
                     winner = turn.winner
                     turn.pile_cards
                     turn.award_spoils(winner)
