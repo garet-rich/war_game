@@ -73,30 +73,29 @@ class Game
             card28, card30, card32, card34, card36, card38, card40, 
             card42, card44, card46, card48, card50, card52].shuffle)
 
-        @player1 = Player.new("player1", deck1)
-        @player2 = Player.new("player2", deck2)
+        @player1 = Player.new("Amanda", deck1)
+        @player2 = Player.new("Bernice", deck2)
         
         start()
-        
     end
 
     def start
         p "Welcome to War! (or Peace) This game will be played with 52 cards."
-        p "The players today are Megan and Aurora."
+        p "The players today are #{@player1.name} and #{@player2.name}"
         p "Type 'GO' to start the game!"
         p "------------------------------------------------------------------"
         @user_input = gets.chomp
 
-        if @user_input == "GO" || @user_input == "go"
-            while(@player1.has_lost? != true && @player2.has_lost? != true && @turn_counter < 100000000)
+        if @user_input.downcase == "go"
+            while(@player1.has_lost? != true && @player2.has_lost? != true && @turn_counter < 1000000)
                 turn = Turn.new(@player1, @player2)
 
-                if(turn.type == :basic)
+                if(turn.type == :basic && turn.winner != nil)
                     winner = turn.winner
                     turn.pile_cards
                     turn.award_spoils(winner)
                     p "Turn #{@turn_counter}: #{winner.name} won #{turn.spoils_of_war.length} cards"
-                elsif(turn.type == :war)
+                elsif(turn.type == :war && turn.winner != nil)
                     winner = turn.winner
                     turn.pile_cards
                     turn.award_spoils(winner)

@@ -30,13 +30,13 @@ class Turn
     end
 
     def winner
-        if type() == :basic
+        if type() == :basic && player1.deck.rank_of_card_at(0) != nil && player2.deck.rank_of_card_at(0) != nil
             if(player1.deck.rank_of_card_at(0) > player2.deck.rank_of_card_at(0))
                 return player1
             else
                 return player2
             end
-        elsif type() == :war
+        elsif type() == :war && player1.deck.rank_of_card_at(2) != nil && player2.deck.rank_of_card_at(2) != nil
             if(player1.deck.rank_of_card_at(2) > player2.deck.rank_of_card_at(2))
                 return player1
             else
@@ -69,19 +69,28 @@ class Turn
             @spoils_of_war << player2.deck.cards[2]
             player2.deck.remove_card
         elsif type() == :mutually_assured_destruction
+            @spoils_of_war << player1.deck.cards[0]
             player1.deck.remove_card
-            player1.deck.remove_card
-            player1.deck.remove_card
+            @spoils_of_war << player2.deck.cards[0]
+            player2.deck.remove_card
 
+            @spoils_of_war << player1.deck.cards[1]
+            player1.deck.remove_card
+            @spoils_of_war << player2.deck.cards[1]
             player2.deck.remove_card
-            player2.deck.remove_card
+
+            @spoils_of_war << player1.deck.cards[2]
+            player1.deck.remove_card
+            @spoils_of_war << player2.deck.cards[2]
             player2.deck.remove_card
         end
     end
 
     def award_spoils(winner)
-        @spoils_of_war.each do |item|
-            winner.deck.add_card(item)
+        if winner != nil
+            @spoils_of_war.each do |item|
+                winner.deck.add_card(item)
+            end
         end
     end
 end
