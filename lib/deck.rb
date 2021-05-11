@@ -19,7 +19,7 @@ class Deck
         high_cards = []
 
         @cards.each do |item|
-            if item.value >= 11
+            if item.rank >= 11
                 high_cards << (item)
             end
         end
@@ -31,7 +31,7 @@ class Deck
         high_card_counter = 0
 
         @cards.each do |item|
-            if item.value >= 11
+            if item.rank >= 11
                 high_card_counter += 1
             end
         end
