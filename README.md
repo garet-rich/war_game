@@ -33,7 +33,8 @@ ruby ...
 
 ### Technologies Used:
 * Ruby
-*  Minitest
+  *  Minitest
+  *  Pry
 
 ### Further reading on rules of War
 https://en.wikipedia.org/wiki/War_(card_game)
